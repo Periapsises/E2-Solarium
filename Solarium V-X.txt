@@ -1,11 +1,11 @@
 @name Solarium V-X
 
-
+@persist IsClient
 
 # Beginning of if(first())
 if(first() | duped()){
     
-    
+    IsClient = 1
     
 }
 # End of if(first())
