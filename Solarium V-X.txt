@@ -6,7 +6,7 @@
 # Beginning of if(first())
 if(first() | duped()){
     
-    IsClient = 1
+    IsClient = 0
     
     function void printClient(String:string){
         printColor(vec(100,150,255),"[Solarium] ",vec(150),"- ",vec(255),String)
@@ -40,9 +40,8 @@ if(PrintArray:count() > 0){
     if(clk("nextString")){
         printServer(PrintArray:shiftString())
         if(PrintArray:count() > 0){
-            timer("nextString",750)
+            timer("nextString",1000)
         }else{IsPrinting = 0}
     }
 }
-
 # End of PrintArray
