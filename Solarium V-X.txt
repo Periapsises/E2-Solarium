@@ -1,1 +1,11 @@
 @name Solarium V-X
+
+
+
+# Beginning of if(first())
+if(first() | duped()){
+    
+    
+    
+}
+# End of if(first())
