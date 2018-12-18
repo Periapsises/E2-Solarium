@@ -1,6 +1,7 @@
 @name Solarium V-X
 
 @persist IsClient
+@persist PrintArray:array IsPrinting:number
 
 # Beginning of if(first())
 if(first() | duped()){
@@ -17,6 +18,31 @@ if(first() | duped()){
         if(IsClient){printClient(String)
         }else{printServer(String)}
     }
+    function void printArray(Array:array){
+        if(IsClient){
+            for(I = 1, Array:count(), 1){
+                printClient(Array[I,string])
+            }
+        }else{
+            PrintArray = PrintArray:add(Array)
+            if(!IsPrinting){
+                IsPrinting = 1
+                timer("nextString",100)
+            }
+        }
+    }
     
 }
 # End of if(first())
+
+# PrintArray server side
+if(PrintArray:count() > 0){
+    if(clk("nextString")){
+        printServer(PrintArray:shiftString())
+        if(PrintArray:count() > 0){
+            timer("nextString",750)
+        }else{IsPrinting = 0}
+    }
+}
+
+# End of PrintArray
