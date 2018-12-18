@@ -14,11 +14,8 @@ if(first() | duped()){
         concmd("say [Solarium] - " + String)
     }
     function void printText(String:string){
-        if(IsClient){
-            printColor(vec(100,150,255),"[Solarium] ",vec(150),"- ",vec(255),String)
-        }else{
-            concmd("say [Solarium] - " + String)
-        }
+        if(IsClient){printClient(String)
+        }else{printServer(String)}
     }
     
 }
