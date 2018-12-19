@@ -4,6 +4,7 @@
 
 @persist IsClient
 @persist PrintArray:array IsPrinting:number
+@persist Time Y M D UT YSpeed MSpeed DSpeed UTSpeed
 
 # Beginning of if(first())
 if(first() | duped()){
@@ -53,6 +54,12 @@ if(first() | duped()){
         Bodies[Name,table]["-a",number] = A1
         Bodies[Name,table]["-e",number] = E1
         Bodies[Name,table]["-M",number] = M1
+    }
+    
+    # Time Calculation
+    function void timeClk(){
+        Time = (367 * Y - 7 * (Y + (M + 9) / 12) / 4 + 275 * M / 9 + D - 730530)
+        Time = Time + (UT / 24.00)
     }
     
     # Names Initialisation
