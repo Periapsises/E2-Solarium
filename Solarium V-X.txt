@@ -51,6 +51,7 @@ if(first() | duped()){
     
     # Setup for orbital elements
     function void setOE(Name:string,ID,Type:string,Size,Color:vector,N,I,W,A,E,M,N1,I1,W1,A1,E1,M1){
+        # N long of asc node I inclin W arg of peri A semi m axis E ecc M mean anomaly
         Bodies[Name,table] = table()
         Bodies[Name,table]["ID",number] = ID
         Bodies[Name,table]["type",string] = Type
@@ -114,6 +115,18 @@ if(first() | duped()){
     Names[3,string] = "Earth",Names[4,string] = "Moon"
     Names[5,string] = "Mars",Names[6,string] = "Phobos",Names[7,string] = "Deimos"
     Names[8,string] = "Ceres"
+    
+    # Orbital Elements Initialisation
+    # N long of asc node I inclin W arg of peri A semi m axis E ecc M mean anomaly
+    setOE("sun"    ,0,"sun"   ,695508,vec(255,175,25) ,0,0,0,0,0,0,0,0,0,0,0,0)
+    setOE("mercury",1,"planet",2440  ,vec(112,101,56) ,48.3313,7.0047,29.1241,0.387098,0.205635,168.6562,3.24587e-5,5.00e-8,1.01444e-5,0,5.59e-10,4.0923344368)
+    setOE("venus"  ,2,"planet",6052  ,vec(193,143,23) ,76.6799,3.3946,54.8910,0.72333,0.006773,48.0052,2.46590e-5,2.75e-8,1.38374e-5,0,-1.302e-9,1.6021302244)
+    setOE("earth"  ,3,"planet",6371  ,vec(125,175,255),0,0,282.9404,1.00,0.016709,356.0470,0,0,4.70935e-5,0,-1.151e-9,0.9856002585)
+    setOE("moon"   ,4,"moon"  ,1737  ,vec(225)        ,125.1228,5.1454,318.0634,0.00257188153,0.054900,115.3654,-0.0529538083,0,0.1643573223,0,0,13.0649929509)
+    setOE("mars"   ,5,"planet",3390  ,vec(193,68,14)  ,49.5574,1.8497,286.5016,1.523688,0.093405,18.6021,2.11081e-5,-1.78e-8,2.92961e-5,0,2.516e-9,0.5240207766)
+    setOE("phobos" ,6,"moon"   ,0    ,vec(0)          ,0,0,0,0,0,0,0,0,0,0,0,0)
+    setOE("deimos" ,7,"moon"   ,0    ,vec(0)          ,0,0,0,0,0,0,0,0,0,0,0,0)
+    setOE("ceres"  ,8,"planet",473   ,vec(150)        ,80.3293,10.593,72.5220, 2.7675,0.075823,95.9891,0.00,5.60439e-6,0.00,1.07388316e-8,2.21100611e-7, 0.21413095)
     
     # Holograms Initialisation
     for(I = 0, Names:count(), 1){planetHolo(I)}
