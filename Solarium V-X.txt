@@ -62,6 +62,37 @@ if(first() | duped()){
         Time = Time + (UT / 24.00)
     }
     
+    # Position Calculation Function
+    function vector getPos(Name:string){
+        local EN = Bodies[Name,table]["N",number] + (Bodies[Name,table]["-N",number] * Time)
+        local Ei = Bodies[Name,table]["i",number] + (Bodies[Name,table]["-i",number] * Time)
+        local Ew = Bodies[Name,table]["w",number] + (Bodies[Name,table]["-w",number] * Time)
+        local Ea = Bodies[Name,table]["a",number] + (Bodies[Name,table]["-a",number] * Time)
+        local Ee = Bodies[Name,table]["e",number] + (Bodies[Name,table]["-e",number] * Time)
+        local EM = Bodies[Name,table]["M",number] + (Bodies[Name,table]["-M",number] * Time)
+        local Ew1 = EN + Ew
+        local EL = EM + Ew1
+        local Eq = Ea * (1 - Ee)
+        local EQ = Ea * (1 + Ee)
+        local EP = Ea ^ 1.5
+        local EE = EM + Ee * (180 / pi()) * sin(EM) * (1.0 + Ee * cos(EM))
+        local I0 = EE
+        local I1 = I0 - (I0 - Ee * (180 / pi()) * sin(I0) - EM) / (1 - Ee * cos(Ee))
+        local I2 = I1 - (I1 - Ee * (180 / pi()) * sin(I1) - EM) / (1 - Ee * cos(Ee))
+        local I3 = I2 - (I2 - Ee * (180 / pi()) * sin(I2) - EM) / (1 - Ee * cos(Ee))
+        local I4 = I3 - (I3 - Ee * (180 / pi()) * sin(I3) - EM) / (1 - Ee * cos(Ee))
+        local I5 = I4 - (I4 - Ee * (180 / pi()) * sin(I4) - EM) / (1 - Ee * cos(Ee))
+        EE = I5 - (I5 - Ee * (180 / pi()) * sin(I5) - EM) / (1 - Ee * cos(Ee))
+        local Xv = Ea * (cos(EE) - Ee)
+        local Yv = Ea * (sqrt(1.0 - Ee*Ee) * sin(EE))
+        local Ev = atan(Yv,Xv)
+        local Er = sqrt(Xv * Xv + Yv * Yv)
+        local Exe = Er * (cos(EN) * cos(Ev + Ew) - sin(EN) * sin(Ev + Ew) * cos(Ei))
+        local Eye = Er * (sin(EN) * cos(Ev + Ew) + cos(EN) * sin(Ev + Ew) * cos(Ei))
+        local Eze = Er * (sin(Ev + Ew) * sin(Ei))
+        return vec(Exe,Eye,Eze)
+    }
+    
     # Names Initialisation
     Names[0,string] = "Sun"
     Names[1,string] = "Mercury"
