@@ -47,6 +47,7 @@ if(first() | duped()){
     function void planetHolo(ID){
         holoCreate(ID,entity():pos(),vec(0.025),ang(),vec(255),"models/sprops/geometry/sphere_144.mdl")
         holoParent(ID,entity())
+        holoDisableShading(ID,1)
     }
     
     # Setup for orbital elements
