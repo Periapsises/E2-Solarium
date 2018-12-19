@@ -18,8 +18,8 @@ if(first() | duped()){
         if(IsClient){printClient(String)
         }else{printServer(String)}
     }
-    function void printArray(Array:array){
-        if(IsClient){
+    function void printArray(Array:array,Override:number){
+        if(IsClient | Override){
             for(I = 1, Array:count(), 1){
                 printClient(Array[I,string])
             }
