@@ -1,6 +1,6 @@
 @name Solarium V-X
 
-@persist Names:table
+@persist Names:table Bodies:table
 
 @persist IsClient
 @persist PrintArray:array IsPrinting:number
@@ -32,6 +32,27 @@ if(first() | duped()){
                 timer("nextString",100)
             }
         }
+    }
+    
+    # Setup for orbital elements
+    function void setOE(Name:string,ID,Type:string,Size,Color:vector,N,I,W,A,E,M,N1,I1,W1,A1,E1,M1){
+        Bodies[Name,table] = table()
+        Bodies[Name,table]["ID",number] = ID
+        Bodies[Name,table]["type",string] = Type
+        Bodies[Name,table]["size",number] = Size
+        Bodies[Name,table]["color",vector] = Color
+        Bodies[Name,table]["N",number] = N
+        Bodies[Name,table]["i",number] = I
+        Bodies[Name,table]["w",number] = W
+        Bodies[Name,table]["a",number] = A
+        Bodies[Name,table]["e",number] = E
+        Bodies[Name,table]["M",number] = M
+        Bodies[Name,table]["-N",number] = N1
+        Bodies[Name,table]["-i",number] = I1
+        Bodies[Name,table]["-w",number] = W1
+        Bodies[Name,table]["-a",number] = A1
+        Bodies[Name,table]["-e",number] = E1
+        Bodies[Name,table]["-M",number] = M1
     }
     
     # Names Initialisation
