@@ -34,6 +34,12 @@ if(first() | duped()){
             }
         }
     }
+    function number km2au(KM){
+        return (KM / 149598073)
+    }
+    function number au2km(AU){
+        return (AU * 149598073)
+    }
     
     # Setup for orbital elements
     function void setOE(Name:string,ID,Type:string,Size,Color:vector,N,I,W,A,E,M,N1,I1,W1,A1,E1,M1){
