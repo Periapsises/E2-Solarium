@@ -34,11 +34,19 @@ if(first() | duped()){
             }
         }
     }
+    
+    # Convert values between Kilometers and Astronomical Units 
     function number km2au(KM){
         return (KM / 149598073)
     }
     function number au2km(AU){
         return (AU * 149598073)
+    }
+    
+    # Planet Hologram creation
+    function void planetHolo(ID){
+        holoCreate(ID,entity():pos(),vec(0.025),ang(),vec(255),"models/sprops/geometry/sphere_144.mdl")
+        holoParent(ID,entity())
     }
     
     # Setup for orbital elements
@@ -54,12 +62,12 @@ if(first() | duped()){
         Bodies[Name,table]["a",number] = A
         Bodies[Name,table]["e",number] = E
         Bodies[Name,table]["M",number] = M
-        Bodies[Name,table]["-N",number] = N1
-        Bodies[Name,table]["-i",number] = I1
-        Bodies[Name,table]["-w",number] = W1
-        Bodies[Name,table]["-a",number] = A1
-        Bodies[Name,table]["-e",number] = E1
-        Bodies[Name,table]["-M",number] = M1
+        Bodies[Name,table]["NDelta",number] = N1
+        Bodies[Name,table]["iDelta",number] = I1
+        Bodies[Name,table]["wDelta",number] = W1
+        Bodies[Name,table]["aDelta",number] = A1
+        Bodies[Name,table]["eDelta",number] = E1
+        Bodies[Name,table]["MDelta",number] = M1
     }
     
     # Time Calculation
@@ -70,12 +78,12 @@ if(first() | duped()){
     
     # Position Calculation Function
     function vector getPos(Name:string){
-        local EN = Bodies[Name,table]["N",number] + (Bodies[Name,table]["-N",number] * Time)
-        local Ei = Bodies[Name,table]["i",number] + (Bodies[Name,table]["-i",number] * Time)
-        local Ew = Bodies[Name,table]["w",number] + (Bodies[Name,table]["-w",number] * Time)
-        local Ea = Bodies[Name,table]["a",number] + (Bodies[Name,table]["-a",number] * Time)
-        local Ee = Bodies[Name,table]["e",number] + (Bodies[Name,table]["-e",number] * Time)
-        local EM = Bodies[Name,table]["M",number] + (Bodies[Name,table]["-M",number] * Time)
+        local EN = Bodies[Name,table]["N",number] + (Bodies[Name,table]["NDelta",number] * Time)
+        local Ei = Bodies[Name,table]["i",number] + (Bodies[Name,table]["iDelta",number] * Time)
+        local Ew = Bodies[Name,table]["w",number] + (Bodies[Name,table]["wDelta",number] * Time)
+        local Ea = Bodies[Name,table]["a",number] + (Bodies[Name,table]["aDelta",number] * Time)
+        local Ee = Bodies[Name,table]["e",number] + (Bodies[Name,table]["eDelta",number] * Time)
+        local EM = Bodies[Name,table]["M",number] + (Bodies[Name,table]["MDelta",number] * Time)
         local Ew1 = EN + Ew
         local EL = EM + Ew1
         local Eq = Ea * (1 - Ee)
@@ -106,6 +114,9 @@ if(first() | duped()){
     Names[3,string] = "Earth",Names[4,string] = "Moon"
     Names[5,string] = "Mars",Names[6,string] = "Phobos",Names[7,string] = "Deimos"
     Names[8,string] = "Ceres"
+    
+    # Holograms Initialisation
+    for(I = 0, Names:count(), 1){planetHolo(I)}
     
 }
 # End of if(first())
