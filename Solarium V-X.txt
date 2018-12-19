@@ -1,5 +1,7 @@
 @name Solarium V-X
 
+@persist Names:table
+
 @persist IsClient
 @persist PrintArray:array IsPrinting:number
 
@@ -31,6 +33,14 @@ if(first() | duped()){
             }
         }
     }
+    
+    # Names Initialisation
+    Names[0,string] = "Sun"
+    Names[1,string] = "Mercury"
+    Names[2,string] = "Venus"
+    Names[3,string] = "Earth",Names[4,string] = "Moon"
+    Names[5,string] = "Mars",Names[6,string] = "Phobos",Names[7,string] = "Deimos"
+    Names[8,string] = "Ceres"
     
 }
 # End of if(first())
